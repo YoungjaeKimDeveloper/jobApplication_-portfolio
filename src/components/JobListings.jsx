@@ -10,7 +10,6 @@ const JobListings = () => {
           Browse Jobs
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {console.log(jobs)}
           {recentJobs.map((job) => (
             <JobListing key={job.id} job={job} />
           ))}
