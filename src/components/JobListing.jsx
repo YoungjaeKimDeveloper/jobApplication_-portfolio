@@ -3,7 +3,6 @@ import { FaMapMarker } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const JobListing = ({ job }) => {
-  console.log(job);
   const [showFullDescroption, setshowFullDescroption] = useState(true);
   return (
     <div className="bg-white rounded-xl shadow-md relative">
@@ -38,7 +37,7 @@ const JobListing = ({ job }) => {
           </div>
 
           <Link
-            to={`/job/${job.id}`}
+            to={`/jobs/${job.id}`}
             className="h-[36px] bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm"
           >
             Read More
