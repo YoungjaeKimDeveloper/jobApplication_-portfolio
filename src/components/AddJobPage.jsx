@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
-const AddJobPage = () => {
+import { useNavigate } from "react-router-dom";
+
+const AddJobPage = ({ addJobSumit }) => {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("Full Time");
   const [location, setLocation] = useState("");
@@ -11,22 +13,25 @@ const AddJobPage = () => {
   const [contactEmail, setContactEmail] = useState("");
   const [contactPhone, setContactPhone] = useState("");
 
+  const navigate = useNavigate();
   const submitForm = (e) => {
     e.preventDefault();
     const newJob = {
-      title: title,
-      type: type,
-      description: description,
-      location: location,
-      salary: salary,
+      title,
+      type,
+      description,
+      location,
+      salary,
       company: {
         name: companyName,
         description: companyDescription,
-        contactEmail: contactEmail,
-        contactPhone: contactPhone,
+        contactEmail,
+        contactPhone,
       },
     };
-    console.log(newJob);
+    addJobSumit(newJob);
+
+    return navigate("/jobs");
   };
   return (
     <section className="bg-indigo-50">

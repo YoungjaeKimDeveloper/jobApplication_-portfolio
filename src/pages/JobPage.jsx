@@ -1,12 +1,27 @@
 import axios from "axios";
 import { FaArrowLeft, FaMapMarker } from "react-icons/fa";
-import { useParams, useLoaderData } from "react-router-dom";
+import { useParams, useLoaderData, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-const JobPage = () => {
+import { toast } from "react-toastify";
+
+const JobPage = ({ deleteJob }) => {
   const job = useLoaderData();
-  const { title, type, location, description, company, salary } = job.data;
-  console.log(title);
-  console.log(job.data);
+  const navigate = useNavigate();
+  const { id, title, type, location, description, company, salary } = job.data;
+
+  const onDeleteClick = (jobId) => {
+    const confirm = window.confirm(
+      "Are you sure you want to delete this listing?"
+    );
+    if (!confirm) {
+      return;
+    } else {
+      deleteJob(jobId);
+
+      toast.success("Job deleted Successfully");
+      navigate("/jobs");
+    }
+  };
   return (
     <>
       <section>
@@ -77,7 +92,10 @@ const JobPage = () => {
                 >
                   Edit Job
                 </Link>
-                <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block">
+                <button
+                  className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
+                  onClick={() => onDeleteClick(id)}
+                >
                   Delete Job
                 </button>
               </div>
